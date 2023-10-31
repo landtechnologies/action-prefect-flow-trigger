@@ -1,0 +1,33 @@
+name: "trigger-prefect-flow"
+description: "triggers a prefect flow deployment"
+inputs:
+  deployment_name:
+    description: "prefect cloud deployment name"
+    required: true
+
+  workspace_name:
+    description: "Prefect cloud workspace name"
+    required: true
+
+  api_key:
+    description: "Prefect cloud api key, please provide a secret"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.8"
+
+    - name: install prefect
+      run: pip install 'prefect==2.8.5' 'pydantic>=1.10.0,<2.0.0'
+      shell: bash
+
+    - name: trigger prefect flow
+      run: |
+        prefect cloud login --key "${{ inputs.api_key }}" --workspace "{{ inputs.workspace_name }}"
+        prefect deployment run "${{ inputs.workspace_name }}"
+      shell: bash
