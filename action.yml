@@ -28,6 +28,6 @@ runs:
 
     - name: trigger prefect flow
       run: |
-        prefect cloud login --key "${{ inputs.api_key }}" --workspace "{{ inputs.workspace_name }}"
+        prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
         prefect deployment run "${{ inputs.workspace_name }}"
       shell: bash
