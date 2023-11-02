@@ -15,3 +15,16 @@ name: api_key
 description: "Prefect cloud api key, please provide a secret"
 required: true
 ```
+
+## Example
+
+```yaml
+jobs:
+  if: github.ref == 'refs/heads/master'
+  trigger_mario_e2e:
+    uses: landtechnologies/action-prefect-flow-trigger@main
+    with:
+      deployment_name: data_ingested_test/prod
+      workspace_name: "dataopslandtech/landtech"
+      api_key: ${{secrets.PREFECT2_API_KEY}}
+```
