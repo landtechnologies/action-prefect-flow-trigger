@@ -20,11 +20,14 @@ required: true
 
 ```yaml
 jobs:
-  if: github.ref == 'refs/heads/master'
   trigger_mario_e2e:
-    uses: landtechnologies/action-prefect-flow-trigger@main
-    with:
-      deployment_name: data_ingested_test/prod
-      workspace_name: "dataopslandtech/landtech"
-      api_key: ${{secrets.PREFECT2_API_KEY}}
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: trigger-prefect-flow
+        uses: landtechnologies/action-prefect-flow-trigger@v1.0.0
+        with:
+          deployment_name: data_ingested_test/prod
+          workspace_name: "dataopslandtech/landtech"
+          api_key: ${{secrets.PREFECT2_API_KEY}}
 ```
