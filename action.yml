@@ -23,7 +23,7 @@ runs:
         python-version: "3.8"
 
     - name: install prefect
-      run: pip install 'prefect==2.8.5' 'pydantic>=1.10.0,<2.0.0'
+      run: pip install 'prefect==2.8.5' 'pydantic>=1.10.0,<2.0.0' 'anyio<4'
       shell: bash
 
     - name: trigger prefect flow
