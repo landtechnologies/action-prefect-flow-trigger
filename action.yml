@@ -35,5 +35,5 @@ runs:
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
         prefect deployment run "${{ inputs.deployment_name }}" \
-        -- params ${{ inputs.params }}
+        --params ${{ inputs.params }}
       shell: bash
