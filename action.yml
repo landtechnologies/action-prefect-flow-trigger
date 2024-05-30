@@ -12,6 +12,11 @@ inputs:
   api_key:
     description: "Prefect cloud api key, please provide a secret"
     required: true
+  
+  params:
+    description: "Prefect flow parameters (optional)"
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -29,5 +34,6 @@ runs:
     - name: trigger prefect flow
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
-        prefect deployment run "${{ inputs.deployment_name }}"
+        prefect deployment run "${{ inputs.deployment_name }}" \
+        -- params ${{ inputs.api_key }}
       shell: bash
