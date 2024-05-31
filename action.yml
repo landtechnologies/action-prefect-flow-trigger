@@ -12,6 +12,11 @@ inputs:
   api_key:
     description: "Prefect cloud api key, please provide a secret"
     required: true
+  
+  params:
+    description: "Prefect flow parameters (optional)"
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -23,11 +28,12 @@ runs:
         python-version: "3.8"
 
     - name: install prefect
-      run: pip install 'prefect~=2.8.7' 'pydantic>=1.10.0,<2.0.0' 'anyio<4' 'typer~=0.9.4'
+      run: pip install 'prefect~=2.8.7' 'pydantic>=1.10.0,<2.0.0' 'anyio<4' 'apprise<1.8.0' 'typer~=0.9.4'
       shell: bash
 
     - name: trigger prefect flow
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
-        prefect deployment run "${{ inputs.deployment_name }}"
+        prefect deployment run "${{ inputs.deployment_name }}" \
+        --params '${{ inputs.params }}'
       shell: bash

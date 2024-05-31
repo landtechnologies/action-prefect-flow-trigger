@@ -14,6 +14,11 @@ required: true
 name: api_key
 description: "Prefect cloud api key, please provide a secret"
 required: true
+
+name: params:
+description: "Prefect flow parameters (optional)"
+required: false
+default: ''
 ```
 
 ## Example
