@@ -23,7 +23,7 @@ inputs:
     which means no waiting and this workflow will complete immediately after triggering 
     the prefect flow run."
     required: false
-    default: 0
+    default: '0'
 
 runs:
   using: "composite"
@@ -45,5 +45,5 @@ runs:
     - name: trigger prefect flow
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
-        python prefect-run-deployment.py "${{ inputs.deployment_name }}" '${{ inputs.params }}' 162000
+        python prefect-run-deployment.py "${{ inputs.deployment_name }}" '${{ inputs.params }}' '${{ inputs.wait }}'
       shell: bash

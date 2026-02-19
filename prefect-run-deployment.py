@@ -10,8 +10,6 @@ FLOW_PARAMETERS = json.loads(argv[2])
 
 # timeout of 0 means no timeout, the deployment will run and not block execution
 timeout=int(argv[3])
-print(timeout)
-
 
 result = run_deployment(name=DEPLOYMENT_NAME, parameters=FLOW_PARAMETERS, timeout=timeout)
 
