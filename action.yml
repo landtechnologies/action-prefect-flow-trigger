@@ -16,7 +16,7 @@ inputs:
   params:
     description: "Prefect flow parameters (optional)"
     required: false
-    default: ''
+    default: '{}'
 
   wait:
     description: "Time in seconds to wait for the flow run to complete. Default is 0, 
