@@ -16,7 +16,13 @@ inputs:
   params:
     description: "Prefect flow parameters (optional)"
     required: false
-    default: ''
+    default: '{}'
+
+  watch:
+    description: "Whether to wait for the flow to finish"
+    required: false
+    type: boolean
+    default: false
 
 runs:
   using: "composite"
@@ -34,6 +40,5 @@ runs:
     - name: trigger prefect flow
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
-        prefect deployment run "${{ inputs.deployment_name }}" \
-        --params '${{ inputs.params }}'
+        prefect deployment run "${{ inputs.deployment_name }}" --params '${{ inputs.params }}' $([[ "${{ inputs.watch }}" == "true" ]] && echo "--watch")
       shell: bash
