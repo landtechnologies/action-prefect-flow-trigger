@@ -37,10 +37,6 @@ runs:
       run: pip install 'prefect~=2.20.9'
       shell: bash
 
-    - name: copy script into workspace
-      run: cp "${GITHUB_ACTION_PATH}/prefect-run-deployment.py" .
-      shell: bash
-
     - name: trigger prefect flow
       run: |
         prefect cloud login --key "${{ inputs.api_key }}" --workspace "${{ inputs.workspace_name }}"
